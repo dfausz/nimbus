@@ -1,50 +1,36 @@
-# Welcome to your Expo app 👋
+# ☁️ Nimbus  
+### _The Forecast of You_
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Nimbus is a modern, cross-platform wellness and productivity app built with **Expo** and **React Native**.  
+It helps users visualize their personal “forecast” — moods, habits, routines, and reminders — in an elegant, ADHD-friendly dashboard that’s designed to be both **visually engaging** and **mentally uncluttered**.
 
-## Get started
+---
 
-1. Install dependencies
+## ✨ Features (in development)
+- 📅 **Routine Tracking** – Build and visualize daily/weekly routines with smooth animations  
+- 💭 **Mood Forecasting** – Log emotional “weather” to spot patterns over time  
+- 📋 **Reminders & Notes** – Quick, glanceable sticky reminders (“Take out the trash,” “Feed the dog,” etc.)  
+- 🧠 **Offline-First Design** – Uses local secure storage; no sign-ups or cloud sync required  
+- 🎨 **Dynamic UI** – Theme inspired by clouds, sunlight, and shifting skies — calm, minimal, reactive  
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 🧰 Tech Stack
+| Layer | Tools / Frameworks |
+|--------|---------------------|
+| Framework | [Expo](https://expo.dev/) + [React Native](https://reactnative.dev/) |
+| Language | TypeScript |
+| UI Library | [React Native Paper](https://callstack.github.io/react-native-paper/) |
+| Navigation | [React Navigation](https://reactnavigation.org/) |
+| Animations | [Framer Motion](https://www.framer.com/motion/) |
+| Storage | [Expo Secure Store](https://docs.expo.dev/versions/latest/sdk/securestore/) |
+| State Management | React Context (planned: Zustand or Redux Toolkit) |
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🚀 Getting Started
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+### 1. Clone the repo
 ```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+git clone https://github.com/<your-username>/nimbus.git
+cd nimbus
