@@ -34,3 +34,63 @@ It helps users visualize their personal “forecast” — moods, habits, routin
 ```bash
 git clone https://github.com/<your-username>/nimbus.git
 cd nimbus
+```
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Start the development server
+```bash
+npx expo start
+```
+
+### 4. Run on your device
+- Install **Expo Go** on iOS/Android  
+- Scan the QR code printed in your terminal  
+
+---
+
+## 🧩 Project Structure
+```
+nimbus/
+├── app/
+│   ├── components/      # Reusable UI components
+│   ├── screens/         # Core screens (Dashboard, Journal, Settings, etc.)
+│   ├── hooks/           # Custom hooks (data, storage, etc.)
+│   ├── theme/           # Typography, color palettes, theming utilities
+│   └── utils/           # Helper functions
+│
+├── assets/              # Icons, illustrations, and fonts
+├── App.tsx              # Root entry point
+└── LICENSE              # Non-commercial license (see file)
+```
+
+---
+
+## 💡 Vision
+Nimbus is designed to feel like checking the weather — but for your life.  
+Each interaction aims to reduce friction for users with ADHD or executive dysfunction by combining calm visuals, lightweight data entry, and positive reinforcement loops.  
+
+### Future plans
+- 🔄 Cross-device sync  
+- 📊 Data visualization and trend analysis  
+- 🧘 Integration with focus timers and mindfulness tools  
+- ☁️ “Nimbus AI” — contextual suggestions and dynamic insights  
+
+---
+
+## 🛠️ Development Status
+Currently in **prototype** stage.  
+Focus areas:
+- Implementing base navigation and dashboard UI  
+- Local data storage and sync layer  
+- Core animation patterns  
+
+---
+
+## 🧑‍💻 Author
+**Daniel Fausz**  
+Senior Software Engineer (Front-End / .NET MAUI / React)  
+[fausz.dev](https://fausz.dev) · [GitHub](https://github.com/dfausz)
