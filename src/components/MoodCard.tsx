@@ -20,14 +20,21 @@ export function MoodCard({
   onChange,
 }: {
   value?: MoodKey;
-  onChange?: (mood: MoodKey) => void;
+  onChange?: (mood?: MoodKey) => void;
 }) {
   const { theme } = useTheme();
   const [local, setLocal] = useState<MoodKey | undefined>(value);
 
+  // keep local in sync when parent changes selected mood (e.g., date change)
+  React.useEffect(() => {
+    setLocal(value);
+  }, [value]);
+
   const select = (mood: MoodKey) => {
-    setLocal(mood);
-    onChange?.(mood);
+    // toggle: if user taps the already-selected mood, unselect it
+    const next = local === mood ? undefined : mood;
+    setLocal(next);
+    onChange?.(next);
   };
 
   return (

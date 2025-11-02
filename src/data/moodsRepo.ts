@@ -32,3 +32,7 @@ export async function getMoodRange(fromYmd: string, toYmd: string) {
 
   return rows as Array<{ date: string; mood: MoodKey }>;
 }
+
+export async function deleteMoodForDate(date: string) {
+  await db.delete(moods).where(eq(moods.date, date));
+}

@@ -3,9 +3,7 @@ import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({
   schema: './src/db/schema.ts',
-  out: './drizzle',
+  out: './src/db/migrations',
   dialect: 'sqlite', 
-  // optional:
-  // strict: true,
-  // verbose: true,
+  driver: "expo"
 });
