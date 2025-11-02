@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GradientBackground } from '../components/GradientBackground';
 import { useTheme } from '../theme/ThemeProvider';
@@ -8,6 +8,7 @@ import { NimbusCard } from '../components/NimbusCard';
 import { MoodCard, MoodKey } from '../components/MoodCard';
 import { getMoodForDate, setMoodForDate, deleteMoodForDate } from '../data/moodsRepo';
 import DateNavigator from '../components/DateNavigator';
+import { MoodCalendarCard } from '../components/MoodCalendarCard';
 
 function startOfDay(d: Date) {
   const x = new Date(d);
@@ -58,8 +59,8 @@ export default function DashboardScreen() {
 
   return (
     <GradientBackground variant="morning">
-      <SafeAreaView edges={['top', 'left', 'right']} style={{ flex: 1 }}>
-        <View style={{ padding: theme.spacing(5) }}>
+      <SafeAreaView edges={['top', 'left', 'right', 'bottom']} style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ padding: theme.spacing(5), paddingBottom: theme.spacing(8) }} showsVerticalScrollIndicator={false}>
           <PageHeader title="Nimbus" subtitle="Your mind’s daily forecast." />
 
           {/* New: Date navigator with chevrons */}
@@ -82,7 +83,9 @@ export default function DashboardScreen() {
               }
             }}
           />
-        </View>
+
+          <MoodCalendarCard endDate={currentDate} />
+        </ScrollView>
       </SafeAreaView>
     </GradientBackground>
   );

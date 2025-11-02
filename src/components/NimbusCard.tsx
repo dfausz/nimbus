@@ -2,19 +2,38 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '../theme/ThemeProvider';
 
-export const NimbusCard: React.FC<{ title: string; subtitle?: string; children?: React.ReactNode }> = ({ title, subtitle, children }) => {
+type NimbusCardProps = {
+  title?: string;
+  subtitle?: string;
+  header?: React.ReactNode;
+  children?: React.ReactNode;
+};
+
+export const NimbusCard: React.FC<NimbusCardProps> = ({ title, subtitle, header, children }) => {
   const { theme } = useTheme();
-  return (
-    <View style={[styles.card, { backgroundColor: theme.colors.card }, theme.shadow.card]}>
-      <Text style={{ color: theme.colors.text, fontFamily: theme.typography.headingsFamily, fontSize: theme.typography.sizes.h2 }}>
-        {title}
-      </Text>
+
+  const hasDefaultHeader = Boolean(title || subtitle);
+  const headerNode = header ?? (hasDefaultHeader ? (
+    <>
+      {title ? (
+        <Text style={{ color: theme.colors.text, fontFamily: theme.typography.headingsFamily, fontSize: theme.typography.sizes.h2 }}>
+          {title}
+        </Text>
+      ) : null}
       {subtitle ? (
         <Text style={{ color: theme.colors.textMuted, marginTop: theme.spacing(1), fontSize: theme.typography.sizes.sm }}>
           {subtitle}
         </Text>
       ) : null}
-      <View style={{ marginTop: theme.spacing(3) }}>{children}</View>
+    </>
+  ) : null);
+
+  return (
+    <View style={[styles.card, { backgroundColor: theme.colors.card }, theme.shadow.card]}>
+      {headerNode ? (
+        <View style={{ marginBottom: header ? 0 : theme.spacing(3) }}>{headerNode}</View>
+      ) : null}
+      {children}
     </View>
   );
 };

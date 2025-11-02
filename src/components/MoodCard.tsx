@@ -42,8 +42,10 @@ export function MoodCard({
       <View
         style={{
           flexDirection: 'row',
-          flexWrap: 'wrap',
-          gap: theme.spacing(2),
+          flexWrap: 'nowrap',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: theme.spacing(1),
         }}
       >
         {MOODS.map(m => {
@@ -53,8 +55,8 @@ export function MoodCard({
                 key={m.key}
                 onPress={() => select(m.key)}
                 style={({ pressed }) => ({
-                    width: '30.5%',
-                    aspectRatio: 1.1,
+                    width: '15%',
+                    aspectRatio: 0.95,
                     borderRadius: theme.radius.lg,
                     // keep these explicit
                     flexDirection: 'column',
@@ -77,24 +79,26 @@ export function MoodCard({
                 {/* inner centering box fixes vertical alignment in aspectRatio + flexWrap layouts */}
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingVertical: theme.spacing(1) }}>
                     <Ionicons
-                    name={m.icon}
-                    size={28}
-                    color={selected ? '#FFFFFF' : theme.colors.text}
-                    // (icon is already centered by parent)
+                      name={m.icon}
+                      size={20}
+                      color={selected ? '#FFFFFF' : theme.colors.text}
+                      // (icon is already centered by parent)
                     />
-                    <Text
-                    style={{
-                        marginTop: theme.spacing(1),
-                        color: selected ? '#FFFFFF' : theme.colors.text,
-                        fontSize: theme.typography.sizes.sm,
-                        textAlign: 'center',
+                    {/* <Text
+                      style={{
+                          marginTop: theme.spacing(1),
+                          color: selected ? '#FFFFFF' : theme.colors.text,
+                          fontSize: theme.typography.sizes.xs,
+                          textAlign: 'center',
 
-                        // Android: remove extra top/bottom font padding so stack centers visually
-                        includeFontPadding: false as any,
-                    }}
+                          // Android: remove extra top/bottom font padding so stack centers visually
+                          includeFontPadding: false as any,
+                      }}
+                      numberOfLines={1}
+                      ellipsizeMode="tail"
                     >
-                    {m.label}
-                    </Text>
+                      {m.label}
+                    </Text> */}
                 </View>
                 </Pressable>
           );
