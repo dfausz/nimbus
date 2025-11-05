@@ -4,36 +4,37 @@ import { Ionicons } from '@expo/vector-icons';
 import { NimbusCard } from './NimbusCard';
 import { useTheme } from '../theme/ThemeProvider';
 
+type RoutineTask = { id: string | number; text: string; completed?: boolean };
 type RoutineCardProps = {
-  id: string;
+  id: string | number;
   title: string;
-  tasks: string[];
+  tasks: RoutineTask[];
   onSave?: (next: { title: string; tasks: string[] }) => void;
+  onToggleComplete?: (taskId: string | number, next: boolean) => void;
   showHeaderActions?: boolean; // controls visibility of edit UI (pencil/check/+)
   initialEditing?: boolean;    // if true, start in editing state when mounted
-  ensureUniqueTitle?: (proposed: string, id: string) => string; // parent-provided title uniquifier
+  ensureUniqueTitle?: (proposed: string, id: string | number) => string; // parent-provided title uniquifier
 };
 
 type DraftItem = { id: string; text: string };
 
-export const RoutineCard: React.FC<RoutineCardProps> = ({ id, title, tasks, onSave, showHeaderActions = true, initialEditing = false, ensureUniqueTitle }) => {
+export const RoutineCard: React.FC<RoutineCardProps> = ({ id, title, tasks, onSave, onToggleComplete, showHeaderActions = true, initialEditing = false, ensureUniqueTitle }) => {
   const { theme } = useTheme();
   const [editing, setEditing] = React.useState(initialEditing);
   const [draftTitle, setDraftTitle] = React.useState(title);
-  const [draftItems, setDraftItems] = React.useState<DraftItem[]>(() => tasks.map((t, i) => ({ id: `${Date.now()}-${i}`, text: t })));
-  const [completed, setCompleted] = React.useState<Record<string, boolean>>({});
+  const [draftItems, setDraftItems] = React.useState<DraftItem[]>(() => tasks.map((t, i) => ({ id: `${Date.now()}-${i}`, text: t.text })));
 
   // keep internal drafts in sync if props change while not editing
   React.useEffect(() => {
     if (!editing) {
       setDraftTitle(title);
-      setDraftItems(tasks.map((t, i) => ({ id: `${title}-${i}`, text: t })));
-    }
-  }, [title, tasks.join('|')]);
+      setDraftItems(tasks.map((t, i) => ({ id: `${title}-${i}`, text: t.text })));
+  }
+  }, [title, tasks.map(t=>t.text).join('|')]);
 
   const beginEdit = () => {
     setDraftTitle(title);
-    setDraftItems(tasks.map((t, i) => ({ id: `${title}-${i}-${Date.now()}`, text: t })));
+    setDraftItems(tasks.map((t, i) => ({ id: `${title}-${i}-${Date.now()}`, text: t.text })));
     setEditing(true);
   };
 
@@ -57,9 +58,8 @@ export const RoutineCard: React.FC<RoutineCardProps> = ({ id, title, tasks, onSa
     setEditing(false);
   };
 
-  const toggleComplete = (idx: number) => {
-    const key = `${tasks[idx]}-${idx}`;
-    setCompleted((c) => ({ ...c, [key]: !c[key] }));
+  const toggleComplete = (taskId: string | number, current?: boolean) => {
+    onToggleComplete?.(taskId, !current);
   };
 
   const HeaderRight = () => (
@@ -144,12 +144,20 @@ export const RoutineCard: React.FC<RoutineCardProps> = ({ id, title, tasks, onSa
       ) : (
         <View style={{ gap: theme.spacing(2) }}>
           {tasks.map((t, idx) => {
-            const key = `${t}-${idx}`;
-            const done = !!completed[key];
+            const key = String(t.id);
+            const done = !!t.completed;
+            const readOnlyList = showHeaderActions && !editing; // screen edit mode, card not editing
+            if (readOnlyList) {
+              return (
+                <View key={key} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Text style={{ color: theme.colors.text }}>{t.text}</Text>
+                </View>
+              );
+            }
             return (
-              <Pressable key={key} onPress={() => toggleComplete(idx)} accessibilityRole="checkbox" accessibilityState={{ checked: done }} style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Pressable key={key} onPress={() => toggleComplete(t.id, done)} accessibilityRole="checkbox" accessibilityState={{ checked: done }} style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Ionicons name={done ? 'checkbox' : 'square-outline'} size={20} color={done ? theme.colors.primary : theme.colors.textMuted} />
-                <Text style={{ marginLeft: theme.spacing(2), color: theme.colors.text, textDecorationLine: done ? 'line-through' : 'none' }}>{t}</Text>
+                <Text style={{ marginLeft: theme.spacing(2), color: theme.colors.text, textDecorationLine: done ? 'line-through' : 'none' }}>{t.text}</Text>
               </Pressable>
             );
           })}

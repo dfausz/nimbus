@@ -9,6 +9,7 @@ import { MoodCard, MoodKey } from '../components/MoodCard';
 import { getMoodForDate, setMoodForDate, deleteMoodForDate } from '../data/moodsRepo';
 import DateNavigator from '../components/DateNavigator';
 import { MoodCalendarCard } from '../components/MoodCalendarCard';
+import { useDateStore } from '../store/dateStore';
 
 function startOfDay(d: Date) {
   const x = new Date(d);
@@ -26,8 +27,8 @@ export default function DashboardScreen() {
   const { theme } = useTheme();
 
   // Keep a “base today” so if user leaves app open past midnight we still move correctly.
-  const baseToday = useMemo(() => startOfDay(new Date()), []);
-  const [currentDate, setCurrentDate] = useState<Date>(baseToday);
+  const selectedDate = useDateStore((s) => s.selectedDate);
+  const setSelectedDate = useDateStore((s) => s.setSelectedDate);
   const [mood, setMood] = useState<MoodKey | undefined>(undefined);
 
   // format date to local YYYY-MM-DD used by DB (avoid UTC shifts from toISOString)
@@ -43,7 +44,7 @@ export default function DashboardScreen() {
     let mounted = true;
     async function load() {
       try {
-        const row = await getMoodForDate(fmtYmd(currentDate));
+        const row = await getMoodForDate(fmtYmd(selectedDate));
         if (!mounted) return;
         setMood((row as any)?.mood as MoodKey | undefined ?? undefined);
       } catch (err) {
@@ -55,7 +56,7 @@ export default function DashboardScreen() {
     return () => {
       mounted = false;
     };
-  }, [currentDate]);
+  }, [selectedDate]);
 
   return (
     <GradientBackground variant="morning">
@@ -64,7 +65,7 @@ export default function DashboardScreen() {
           <PageHeader title="Nimbus" subtitle="Your mind’s daily forecast." />
 
           {/* New: Date navigator with chevrons */}
-          <DateNavigator date={currentDate} onChange={setCurrentDate} />
+          <DateNavigator date={selectedDate} onChange={setSelectedDate} />
 
           <MoodCard
             value={mood}
@@ -72,7 +73,7 @@ export default function DashboardScreen() {
               // update UI immediately
               setMood(m);
               try {
-                const dateKey = fmtYmd(currentDate);
+                const dateKey = fmtYmd(selectedDate);
                 if (m) {
                   await setMoodForDate(dateKey, m);
                 } else {
@@ -84,7 +85,7 @@ export default function DashboardScreen() {
             }}
           />
 
-          <MoodCalendarCard endDate={currentDate} />
+          <MoodCalendarCard endDate={selectedDate} refreshKey={mood} />
         </ScrollView>
       </SafeAreaView>
     </GradientBackground>

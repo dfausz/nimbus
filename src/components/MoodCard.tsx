@@ -52,55 +52,40 @@ export function MoodCard({
           const selected = local === m.key;
           return (
             <Pressable
-                key={m.key}
-                onPress={() => select(m.key)}
-                style={({ pressed }) => ({
-                    width: '15%',
-                    aspectRatio: 0.95,
-                    borderRadius: theme.radius.lg,
-                    // keep these explicit
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+              key={m.key}
+              onPress={() => select(m.key)}
+              style={({ pressed }) => ({
+                  width: '15%',
+                  aspectRatio: 0.95,
+                  borderRadius: theme.radius.lg,
+                  // keep these explicit
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
 
-                    // visual styles
-                    backgroundColor: selected ? theme.colors.primary : theme.colors.card,
+                  // visual styles
+                  backgroundColor: selected ? theme.colors.primary : theme.colors.card,
 
-                    // keep border width constant to avoid tiny layout shifts
-                    borderWidth: 1,
-                    borderColor: selected ? 'transparent' : (theme.name === 'dark' ? '#2A2F36' : '#E8E8E8'),
+                  // keep border width constant to avoid tiny layout shifts
+                  borderWidth: 1,
+                  borderColor: selected ? 'transparent' : (theme.name === 'dark' ? '#2A2F36' : '#E8E8E8'),
 
-                    // gentle press feedback
-                    opacity: pressed ? 0.85 : 1,
-                })}
-                accessibilityRole="button"
-                accessibilityLabel={m.label}
-                >
-                {/* inner centering box fixes vertical alignment in aspectRatio + flexWrap layouts */}
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingVertical: theme.spacing(1) }}>
-                    <Ionicons
-                      name={m.icon}
-                      size={20}
-                      color={selected ? '#FFFFFF' : theme.colors.text}
-                      // (icon is already centered by parent)
-                    />
-                    {/* <Text
-                      style={{
-                          marginTop: theme.spacing(1),
-                          color: selected ? '#FFFFFF' : theme.colors.text,
-                          fontSize: theme.typography.sizes.xs,
-                          textAlign: 'center',
-
-                          // Android: remove extra top/bottom font padding so stack centers visually
-                          includeFontPadding: false as any,
-                      }}
-                      numberOfLines={1}
-                      ellipsizeMode="tail"
-                    >
-                      {m.label}
-                    </Text> */}
-                </View>
-                </Pressable>
+                  // gentle press feedback
+                  opacity: pressed ? 0.85 : 1,
+              })}
+              accessibilityRole="button"
+              accessibilityLabel={m.label}
+              >
+              {/* inner centering box fixes vertical alignment in aspectRatio + flexWrap layouts */}
+              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingVertical: theme.spacing(1) }}>
+                  <Ionicons
+                    name={m.icon}
+                    size={20}
+                    color={selected ? '#FFFFFF' : theme.colors.text}
+                    // (icon is already centered by parent)
+                  />
+              </View>
+            </Pressable>
           );
         })}
       </View>

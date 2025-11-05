@@ -32,3 +32,19 @@ export const todos = sqliteTable('todos', {
   createdAt: integer('created_at', { mode: 'timestamp_ms' }),
   completedAt: integer('completed_at', { mode: 'timestamp_ms' }),
 });
+
+export const routines = sqliteTable('routines', {
+  id: integer('id').primaryKey(),
+  title: text('title').notNull(),
+  position: integer('position'),
+  createdAt: integer('created_at', { mode: 'timestamp_ms' }),
+});
+
+export const routineTasks = sqliteTable('routine_tasks', {
+  id: integer('id').primaryKey(),
+  routineId: integer('routine_id').notNull(),
+  text: text('text').notNull(),
+  position: integer('position'),
+  completed: integer('completed', { mode: 'boolean' }).default(false),
+  createdAt: integer('created_at', { mode: 'timestamp_ms' }),
+});
