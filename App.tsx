@@ -8,8 +8,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as PaperProvider } from 'react-native-paper';
 import StatusBarBridge from './src/components/StatusBarBridge';
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
-import migrations from './src/db/migrations/migrations';
-import { db } from './src/db/client'
+import migrations from './src/data/migrations/migrations';
+import { db } from './src/data/db'
 
 export default function App() {
   const { success, error } = useMigrations(db, migrations);

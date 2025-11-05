@@ -1,5 +1,5 @@
-import { db } from '../db/client';
-import { moods } from '../db/schema';
+import { db } from '../db';
+import { moods } from '../schema';
 import { eq, and, gte, lte } from 'drizzle-orm';
 
 export type MoodKey = 'sunny' | 'partly' | 'cloudy' | 'rain' | 'storm' | 'snow';

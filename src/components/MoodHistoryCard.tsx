@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { NimbusCard } from './NimbusCard';
 import { useTheme } from '../theme/ThemeProvider';
-import { getMoodRange } from '../data/moodsRepo';
-import type { MoodKey } from '../data/moodsRepo';
+import { getMoodRange } from '../data/repositories/moodsRepo';
+import type { MoodKey } from '../data/repositories/moodsRepo';
 
 function fmtYmd(d: Date) {
   const y = d.getFullYear();

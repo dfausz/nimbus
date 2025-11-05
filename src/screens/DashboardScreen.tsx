@@ -6,7 +6,7 @@ import { useTheme } from '../theme/ThemeProvider';
 import PageHeader from '../components/PageHeader';
 import { NimbusCard } from '../components/NimbusCard';
 import { MoodCard, MoodKey } from '../components/MoodCard';
-import { getMoodForDate, setMoodForDate, deleteMoodForDate } from '../data/moodsRepo';
+import { getMoodForDate, setMoodForDate, deleteMoodForDate } from '../data/repositories/moodsRepo';
 import DateNavigator from '../components/DateNavigator';
 import { MoodCalendarCard } from '../components/MoodCalendarCard';
 import { useDateStore } from '../store/dateStore';

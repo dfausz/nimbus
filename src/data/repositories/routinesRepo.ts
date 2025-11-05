@@ -1,5 +1,5 @@
-import { db } from '../db/client';
-import { routines, routineTasks } from '../db/schema';
+import { db } from '../db';
+import { routines, routineTasks } from '../schema';
 import { eq } from 'drizzle-orm';
 
 export type RoutineTaskRow = { id: number; routineId: number; text: string; position: number | null; completed: number };

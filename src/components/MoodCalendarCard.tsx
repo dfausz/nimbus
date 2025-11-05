@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { NimbusCard } from './NimbusCard';
 import { useTheme } from '../theme/ThemeProvider';
-import { getMoodRange, MoodKey } from '../data/moodsRepo';
+import { getMoodRange, MoodKey } from '../data/repositories/moodsRepo';
 
 function fmtYmd(d: Date) {
   const y = d.getFullYear();

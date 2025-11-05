@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { GradientBackground } from '../components/GradientBackground';
 import { useTheme } from '../theme/ThemeProvider';
 import { RoutineCard } from '../components/RoutineCard';
-import { listRoutines, createRoutine, saveRoutine, toggleTask } from '../data/routinesRepo';
+import { listRoutines, createRoutine, saveRoutine, toggleTask } from '../data/repositories/routinesRepo';
 import { Ionicons } from '@expo/vector-icons';
 import { Menu } from 'react-native-paper';
 import { useDateStore } from '../store/dateStore';
